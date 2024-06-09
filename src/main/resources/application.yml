@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/${POSTGRES_DB}
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_DB}
+  jpa:
+    hibernate:
+      ddl-auto: none
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
+
+security:
+  jwt:
+    auth:
+      header: Authorization
+      prefix: Bearer
+    access-token-expiration-milliseconds: 10_800_000
+    refresh-token-expiration-milliseconds: 259_200_000
+    secret: MIICWwIBAAKBgQCaPBOjAqd0QFVdjxx6sYvZEimny3Y2ABEIAArDjEGgsLw8Hw+t 1/Tr9AOPSVwHIHwmnnp5fgIp1HpsIspE9vUu+mKT+FRvl1CpJm6GLAjo+VxOf/U3 TFL83r22EDDwz8okFvbkccItF+frzf0SB+8+2bObbm+DfBAfEqKCpGfgNQIDAQAB AoGAGaSDX0bBsIJBrxxsD7oVFjH+2vbo4HGCY2IeaASZpK29ngFMCgstnU0kil4X /tdXzNPsaOaaVXoOIIxoNK8adEKfUj+1VzW1GuKWXou2zLcRUFtrLmhY/swadjs6 WMOzWUD+VRoggmm9vH/+VFTRxCe1ioaF4IMZgDXw38G4GAECQQDcXLa1+zTTpgHK ZAsLvvs1T35STdZug+Brf+69+Hwr/XHXI2d67U9uKPMraYavL1A2LzgmlwlCsz0F AJgXhCbVAkEAsy2Y3WydXwHaTboCCBq9ss3cSNMhQOCchLEhaGLXLRnUu1MoLxZb Wsy7yitQQOx0nmcDg5tp2US/GyPZkrhD4QJAXPzGoP5TKWio4sXan2dEzBcyX/q2 nMYLgnFmxkU/6LQ3QKiQ9x+C4CJpko0iJ3SYrXS5hhc/8iR+gEji5TF/zQJAMRjf eF0Yyj3RudasU9gv/tzV7cacqBBkEyAOTXI4EA2x8xqYOj7gDYNoOb+goAmq8vS7 S8a8PGLQEvnB1qhTQQJASYZ6qgQ9wf4Up1+RJeFdxqwVkCPLrZ1PvTepH99qwCnq FAoFunVE/5U39ocAoogX+fJc+Twj8RmaNLT3igKDAw==
+
+
