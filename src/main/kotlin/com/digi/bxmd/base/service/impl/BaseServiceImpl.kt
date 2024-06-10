@@ -1,20 +1,20 @@
 package com.digi.bxmd.base.service.impl
 
-import com.digi.bxmd.dto.BaseDto
 import com.digi.bxmd.base.entity.BaseEntity
 import com.digi.bxmd.base.repository.BaseRepository
 import com.digi.bxmd.base.repository.BaseSearchCriteria
 import com.digi.bxmd.base.service.BaseService
-import com.digi.bxmd.exception.BusinessException
 import com.digi.bxmd.constant.MessageKey
+import com.digi.bxmd.dto.BaseDto
+import com.digi.bxmd.exception.BusinessException
 import org.modelmapper.ModelMapper
 import org.slf4j.LoggerFactory
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.core.env.Environment
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageImpl
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort
-import java.io.Serializable
 import java.lang.reflect.ParameterizedType
 import javax.transaction.Transactional
 
@@ -28,7 +28,7 @@ abstract class BaseServiceImpl<D : BaseDto, E : BaseEntity, S : BaseSearchCriter
     private val clazzDto: Class<D>
     private val clazzEntity: Class<E>
 
-    private lateinit var modelMapper: ModelMapper
+    @Autowired private lateinit var modelMapper: ModelMapper
 
     private lateinit var env: Environment
 

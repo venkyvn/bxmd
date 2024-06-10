@@ -5,7 +5,6 @@ import com.digi.bxmd.security.TokenFilter
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.http.HttpMethod
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
@@ -37,7 +36,8 @@ class SecurityConfiguration @Autowired constructor(
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
             .authorizeRequests()
-            .antMatchers("/auth/login", "/auth/refresh", "/auth/logout").permitAll() // Allow these endpoints
+            .antMatchers("/auth/login", "/auth/refresh", "/auth/logout").permitAll()
+            .antMatchers("/*").authenticated()// Allow these endpoints
 
         http.addFilterBefore(TokenFilter(tokenProvider), UsernamePasswordAuthenticationFilter::class.java)
     }

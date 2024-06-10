@@ -1,8 +1,8 @@
 package com.digi.bxmd.controller
 
 import com.digi.bxmd.dto.JwtToken
-import com.digi.bxmd.dto.ResponseDto
 import com.digi.bxmd.dto.LoginDto
+import com.digi.bxmd.dto.ResponseDto
 import com.digi.bxmd.service.UserService
 import com.digi.bxmd.service.impl.AuthServiceImpl
 import io.swagger.annotations.Api
@@ -16,33 +16,33 @@ import javax.validation.Valid
 @RequestMapping("auth")
 @Api(tags = ["Authentication"], description = "Authenticate users")
 class AuthController @Autowired constructor(
-    private val authServiceImpl: AuthServiceImpl,
-    private val userServiceImpl: UserService,
+    private val authService: AuthServiceImpl,
+    private val userService: UserService,
 //    private val authHelper: AuthHelperΩ
 ) {
 
     @PostMapping("/login")
     @ApiOperation("Sign in by email and password")
     fun login(@Valid @RequestBody loginDto: LoginDto): JwtToken {
-        return authServiceImpl.login(loginDto)
+        return authService.login(loginDto)
     }
 
     @PostMapping("/logout")
     @ApiOperation(value = "Sign out")
     fun logout(@Valid @RequestBody jwtToken: JwtToken) {
-        authServiceImpl.logout(jwtToken)
+        authService.logout(jwtToken)
     }
 
     @PostMapping("/refresh")
     @ApiOperation(value = "Refresh")
     fun refresh(@Valid @RequestBody jwtToken: JwtToken): JwtToken {
-        return authServiceImpl.refreshToken(jwtToken)
+        return authService.refreshToken(jwtToken)
     }
 
     @GetMapping("/me")
     @ApiOperation(value = "Get current user")
     fun getCurrentUser(): ResponseEntity<ResponseDto> {
-        return ResponseDto.ok(userServiceImpl.getCurrentUserDto())
+        return ResponseDto.ok(userService.getCurrentUserDto())
     }
 
 }

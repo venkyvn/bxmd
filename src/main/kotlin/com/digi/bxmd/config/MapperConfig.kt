@@ -11,8 +11,11 @@ class MapperConfig {
     @Bean
     fun modelMapper(): ModelMapper {
         val modelMapper = ModelMapper()
-        modelMapper.configuration.setMatchingStrategy(MatchingStrategies.STRICT)
-            .setSkipNullEnabled(true).setAmbiguityIgnored(true)
+        modelMapper.configuration
+            .setMatchingStrategy(MatchingStrategies.STRICT)
+            .setFieldMatchingEnabled(true)
+            .setSkipNullEnabled(true)
+            .setAmbiguityIgnored(true)
         return modelMapper
 
     }

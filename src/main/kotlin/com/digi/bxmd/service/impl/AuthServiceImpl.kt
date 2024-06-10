@@ -90,7 +90,7 @@ class AuthServiceImpl @Autowired constructor(
 
     fun refreshToken(jwtTokenReq: JwtToken): JwtToken {
         val userToken = userTokenRepo.findByRefreshToken(jwtTokenReq.refreshToken)
-        if (tokenProvider.validateToken(jwtTokenReq.refreshToken)) {
+        if (tokenProvider.validateToken(jwtTokenReq.refreshToken) && userToken.isPresent) {
             val authentication = tokenProvider.getAuthentication(jwtTokenReq.refreshToken)
 
             SecurityContextHolder.getContext().authentication = authentication
@@ -104,7 +104,6 @@ class AuthServiceImpl @Autowired constructor(
             throw IllegalArgumentException("Invalid refresh token")
         }
     }
-
 
 
     fun revokeToken(id: Long) {
