@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository
 import java.util.*
 
 @Repository
-interface UserRepo : BaseRepository<User, Long> {
+interface UserRepository : BaseRepository<User, Long> {
 
     fun findByUsernameIgnoreCase(username: String): Optional<User>
 

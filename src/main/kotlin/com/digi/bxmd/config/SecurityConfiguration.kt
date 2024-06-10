@@ -37,17 +37,7 @@ class SecurityConfiguration @Autowired constructor(
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
             .authorizeRequests()
-            .antMatchers(
-                HttpMethod.GET,
-                "/api/v1/foo",
-                "/api/v1/bar"
-            ).authenticated()
-            .antMatchers(
-                HttpMethod.POST,
-                "/api/v1/foo",
-                "/api/v1/bar"
-            ).authenticated()
-            .antMatchers("/api/v1/**").permitAll()
+            .antMatchers("/auth/login", "/auth/refresh", "/auth/logout").permitAll() // Allow these endpoints
 
         http.addFilterBefore(TokenFilter(tokenProvider), UsernamePasswordAuthenticationFilter::class.java)
     }

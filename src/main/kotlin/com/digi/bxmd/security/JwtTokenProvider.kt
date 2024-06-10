@@ -95,7 +95,7 @@ class JwtTokenProvider(
     fun resolveToken(request: HttpServletRequest): String? {
         val header = request.getHeader(org.springframework.http.HttpHeaders.AUTHORIZATION)
 
-        return if (StringUtils.hasText(header) && header.contains("Bearer ")) {
+        return if (StringUtils.hasText(header) && header.contains(jwtConfig.authPrefix)) {
             header.substring(7)
         } else {
             null

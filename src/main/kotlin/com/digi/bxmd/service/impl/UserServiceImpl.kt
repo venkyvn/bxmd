@@ -6,7 +6,7 @@ import com.digi.bxmd.constant.MessageKey
 import com.digi.bxmd.dto.UserDto
 import com.digi.bxmd.entity.User
 import com.digi.bxmd.exception.BusinessException
-import com.digi.bxmd.repository.UserRepo
+import com.digi.bxmd.repository.UserRepository
 import com.digi.bxmd.service.UserService
 import com.digi.bxmd.util.SecurityUtils
 import org.springframework.beans.factory.annotation.Autowired
@@ -16,8 +16,8 @@ import java.util.*
 
 @Service
 @Transactional(readOnly = true)
-class UserServiceImpl @Autowired constructor(userRepo: UserRepo) :
-    BaseServiceImpl<UserDto, User, BaseSearchCriteria<String>, UserRepo, Long>(userRepo), UserService {
+class UserServiceImpl @Autowired constructor(userRepository: UserRepository) :
+    BaseServiceImpl<UserDto, User, BaseSearchCriteria<String>, UserRepository, Long>(userRepository), UserService {
 
     override fun getCurrentUser(): Optional<User> {
         return SecurityUtils.getCurrentUser().flatMap { this.getRepository().findByUsernameIgnoreCase(it) }

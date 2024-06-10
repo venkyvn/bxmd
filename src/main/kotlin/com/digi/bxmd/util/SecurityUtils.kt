@@ -1,6 +1,6 @@
 package com.digi.bxmd.util
 
-import com.digi.bxmd.constant.RolesConstants
+import com.digi.bxmd.constant.RoleConstant
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.core.userdetails.UserDetails
 import java.util.*
@@ -46,7 +46,7 @@ object SecurityUtils {
         return Optional.ofNullable(securityContext.authentication)
             .map { authentication ->
                 authentication.authorities.none { grantedAuthority ->
-                    grantedAuthority.authority == RolesConstants.ANONYMOUS
+                    grantedAuthority.authority == RoleConstant.ANONYMOUS
                 }
             }.orElse(false)
     }

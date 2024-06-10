@@ -2,11 +2,11 @@ package com.digi.bxmd.service.impl
 
 import com.digi.bxmd.constant.MessageKey
 import com.digi.bxmd.dto.JwtToken
-import com.digi.bxmd.dto.SignInDto
+import com.digi.bxmd.dto.LoginDto
 import com.digi.bxmd.entity.UserToken
 import com.digi.bxmd.entity.enumerate.UserStatusEnum
 import com.digi.bxmd.exception.BusinessException
-import com.digi.bxmd.repository.UserRepo
+import com.digi.bxmd.repository.UserRepository
 import com.digi.bxmd.repository.UserTokenRepo
 import com.digi.bxmd.security.JwtTokenProvider
 import lombok.extern.slf4j.Slf4j
@@ -27,11 +27,11 @@ class AuthServiceImpl @Autowired constructor(
     private val tokenProvider: JwtTokenProvider,
     private val authenticationManager: AuthenticationManager,
     private val userTokenRepo: UserTokenRepo,
-    private val userRepo: UserRepo,
+    private val userRepository: UserRepository,
 ) {
 
-    fun signIn(signInDto: SignInDto): JwtToken {
-        return getJwtToken(signInDto.username, signInDto.password)
+    fun login(loginDto: LoginDto): JwtToken {
+        return getJwtToken(loginDto.username, loginDto.password)
     }
 
     fun getJwtToken(principal: String, loginPassword: String): JwtToken {
@@ -39,7 +39,7 @@ class AuthServiceImpl @Autowired constructor(
         val authentication: Authentication = authenticationManager.authenticate(authenticationToken)
         SecurityContextHolder.getContext().authentication = authentication
 
-        val user = userRepo.findFirstByUsernameIgnoreCaseOrEmailIgnoreCase(principal, principal)
+        val user = userRepository.findFirstByUsernameIgnoreCaseOrEmailIgnoreCase(principal, principal)
             .orElseThrow {
                 BusinessException(MessageKey.NOT_FOUND)
             }
@@ -57,7 +57,7 @@ class AuthServiceImpl @Autowired constructor(
         return JwtToken(accessToken, refreshToken)
     }
 
-    fun signOut(jwtToken: JwtToken) {
+    fun logout(jwtToken: JwtToken) {
         val isTokenExist: Optional<UserToken> = userTokenRepo.findByRefreshToken(jwtToken.refreshToken)
         if (isTokenExist.isPresent) {
             userTokenRepo.deleteAllByRefreshToken(jwtToken.refreshToken)

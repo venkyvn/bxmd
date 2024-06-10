@@ -28,13 +28,5 @@ COPY --from=build /app/build/libs/*.jar app.jar
 # Expose port 8080
 EXPOSE 8080
 
-## Set environment variables
-#ENV SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/yourdatabase
-#ENV SPRING_DATASOURCE_USERNAME=yourusername
-#ENV SPRING_DATASOURCE_PASSWORD=yourpassword
-#ENV SPRING_JPA_HIBERNATE_DDL_AUTO=none
-#ENV SPRING_FLYWAY_ENABLED=true
-#ENV SPRING_FLYWAY_LOCATIONS=classpath:db/migration
-
 # Run the JAR file
 ENTRYPOINT ["java", "-jar", "app.jar"]

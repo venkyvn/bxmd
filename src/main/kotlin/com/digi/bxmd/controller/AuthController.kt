@@ -2,8 +2,7 @@ package com.digi.bxmd.controller
 
 import com.digi.bxmd.dto.JwtToken
 import com.digi.bxmd.dto.ResponseDto
-import com.digi.bxmd.dto.SignInDto
-import com.digi.bxmd.dto.UserDto
+import com.digi.bxmd.dto.LoginDto
 import com.digi.bxmd.service.UserService
 import com.digi.bxmd.service.impl.AuthServiceImpl
 import io.swagger.annotations.Api
@@ -22,16 +21,16 @@ class AuthController @Autowired constructor(
 //    private val authHelper: AuthHelperΩ
 ) {
 
-    @PostMapping("/signIn")
+    @PostMapping("/login")
     @ApiOperation("Sign in by email and password")
-    fun signIn(@Valid @RequestBody signInDto: SignInDto): JwtToken {
-        return authServiceImpl.signIn(signInDto)
+    fun login(@Valid @RequestBody loginDto: LoginDto): JwtToken {
+        return authServiceImpl.login(loginDto)
     }
 
-    @PostMapping("/signOut")
+    @PostMapping("/logout")
     @ApiOperation(value = "Sign out")
-    fun signOut(@Valid @RequestBody jwtToken: JwtToken) {
-        authServiceImpl.signOut(jwtToken)
+    fun logout(@Valid @RequestBody jwtToken: JwtToken) {
+        authServiceImpl.logout(jwtToken)
     }
 
     @PostMapping("/refresh")

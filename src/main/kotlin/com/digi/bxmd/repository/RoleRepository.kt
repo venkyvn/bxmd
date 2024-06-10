@@ -8,4 +8,5 @@ import java.util.*
 
 @Repository
 interface RoleRepository : BaseRepository<Role, Long> {
+    fun findByName(role: String): Optional<Role>
 }

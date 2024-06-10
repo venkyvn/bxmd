@@ -3,7 +3,7 @@ package com.digi.bxmd.dto
 import com.digi.bxmd.constant.MessageKey
 import javax.validation.constraints.NotBlank
 
-data class SignInDto(
+data class LoginDto(
     @NotBlank(message = MessageKey.VALIDATION_NOT_EMPTY)
     var username: String,
 
