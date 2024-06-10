@@ -16,8 +16,6 @@ COPY src src
 # Make the gradlew script executable
 RUN chmod +x gradlew
 
-RUN sed -i '' 's/\r$//' gradlew
-
 # Build the application
 RUN ./gradlew build
 
