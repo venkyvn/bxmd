@@ -13,6 +13,9 @@ COPY settings.gradle.kts .
 # Copy the application source code
 COPY src src
 
+# Make the gradlew script executable
+RUN chmod +x gradlew
+
 # Build the application
 RUN ./gradlew build
 
