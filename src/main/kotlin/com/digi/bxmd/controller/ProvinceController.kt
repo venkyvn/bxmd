@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("\${apiBasePath}province")
+@RequestMapping("\${apiBasePath}/province")
 @Api(tags = ["Province"], description = "Province")
 class ProvinceController @Autowired constructor(
     provinceService: ProvinceService,
