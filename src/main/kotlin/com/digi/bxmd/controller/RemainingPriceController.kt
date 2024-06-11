@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("remaining-price")
+@RequestMapping("\${apiBasePath}remaining-price")
 @Api(tags = ["RemainingPrice"], description = "RemainingPrice")
 class RemainingPriceController @Autowired constructor(
     remainingPriceService: RemainingPriceService,

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*
 import javax.validation.Valid
 
 @RestController
-@RequestMapping("auth")
+@RequestMapping("\${apiBasePath}/auth")
 @Api(tags = ["Authentication"], description = "Authenticate users")
 class AuthController @Autowired constructor(
     private val authService: AuthServiceImpl,

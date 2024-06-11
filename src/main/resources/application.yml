@@ -12,6 +12,8 @@ spring:
     enabled: false
     locations: classpath:db/migration
 
+apiBasePath: /api/v1
+
 security:
   jwt:
     auth:

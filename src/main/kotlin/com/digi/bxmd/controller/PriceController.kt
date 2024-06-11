@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("price")
+@RequestMapping("\${apiBasePath}price")
 @Api(tags = ["Price"], description = "Price")
 class PriceController @Autowired constructor(
     priceService: PriceService,

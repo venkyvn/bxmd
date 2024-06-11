@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("package")
+@RequestMapping("\${apiBasePath}package")
 @Api(tags = ["Package"], description = "Package")
 class PackageController @Autowired constructor(
     private val packageService: PackageService,
