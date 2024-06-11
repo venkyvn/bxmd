@@ -9,7 +9,7 @@ spring:
     show-sql: true
 
   flyway:
-    enabled: true
+    enabled: false
     locations: classpath:db/migration
 
 security:
@@ -17,8 +17,8 @@ security:
     auth:
       header: Authorization
       prefix: Bearer
-    access-token-expiration-milliseconds: 10_800_000
-    refresh-token-expiration-milliseconds: 259_200_000
+    access-token-expiration-milliseconds: 36000
+    refresh-token-expiration-milliseconds: 2592000
     secret: I6oWsZeW1Kc9cCqIxgcPzQbsffv9Q5afA1ID+XoyIdFdF+Xar+NwqahS4+w5fgqL+meIwSOmMypUlSJEGEUJqA==
 
 

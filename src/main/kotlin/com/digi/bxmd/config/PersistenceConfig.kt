@@ -19,10 +19,10 @@ class AuditorAwareImpl : AuditorAware<String> {
     override fun getCurrentAuditor(): Optional<String> {
         return Optional.ofNullable(SecurityContextHolder.getContext().authentication)
             .map { authentication ->
-                if (authentication.getPrincipal() is UserDetails) {
-                    return@map (authentication.getPrincipal() as UserDetails).username
+                if (authentication.principal is UserDetails) {
+                    return@map (authentication.principal as UserDetails).username
                 } else {
-                    return@map authentication.getPrincipal().toString()
+                    return@map authentication.principal.toString()
                 }
             }
     }
