@@ -6,10 +6,10 @@ import javax.validation.constraints.NotEmpty
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 data class JwtToken(
-    val token: String? = null,
+    var token: String? = null,
 
     @field:NotEmpty(message = "Refresh token is empty!")
-    val refreshToken: String,
+    var refreshToken: String,
 
-    val expired: Long? = null,
+    var expired: Long? = null,
 ) : Serializable

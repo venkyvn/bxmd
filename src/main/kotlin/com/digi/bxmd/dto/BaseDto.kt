@@ -6,7 +6,7 @@ import java.util.*
 
 abstract class BaseDto : Serializable {
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    val id: Long? = null
+    var id: Long? = null
 
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     var updatedDate: Date? = null

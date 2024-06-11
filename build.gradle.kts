@@ -38,6 +38,10 @@ dependencies {
 
     implementation("org.flywaydb:flyway-core")
 
+    implementation("io.github.microutils:kotlin-logging-jvm:2.0.11")
+//    implementation("ch.qos.logback:logback-classic:1.2.6")
+
+
     // Swagger/OpenAPI
     implementation("org.springdoc:springdoc-openapi-ui:1.6.6")
     implementation("org.springdoc:springdoc-openapi-kotlin:1.6.6")

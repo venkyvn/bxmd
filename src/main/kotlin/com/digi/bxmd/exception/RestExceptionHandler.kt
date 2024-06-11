@@ -3,6 +3,7 @@ package com.digi.bxmd.exception
 
 import com.digi.bxmd.constant.MessageKey
 import lombok.extern.slf4j.Slf4j
+import mu.KotlinLogging
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.MessageSource
 import org.springframework.dao.ConcurrencyFailureException
@@ -32,6 +33,8 @@ class RestExceptionHandler {
     @Autowired
     private lateinit var messageSource: MessageSource
 
+    private val log = KotlinLogging.logger {}
+
     @ExceptionHandler(BusinessException::class)
     fun handleBusinessError(request: HttpServletRequest, e: BusinessException): ResponseEntity<Any> {
         val exInfo = ErrorInfo(
@@ -46,7 +49,7 @@ class RestExceptionHandler {
     @ExceptionHandler(Exception::class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     fun handleGlobalError(request: HttpServletRequest, ex: Exception): ResponseEntity<Any> {
-//        log.error("Exception occurred : ${request.requestURL}", ex)
+        log.error("Exception occurred : ${request.requestURL}", ex)
         val errorInfo = ErrorInfo(
             HttpStatus.INTERNAL_SERVER_ERROR.value(),
             MessageKey.SERVER_ERROR,
@@ -59,7 +62,7 @@ class RestExceptionHandler {
     @ExceptionHandler(ConcurrencyFailureException::class)
     @ResponseStatus(HttpStatus.CONFLICT)
     fun handleConcurrencyError(ex: ConcurrencyFailureException, request: HttpServletRequest): ResponseEntity<Any> {
-//        log.error("ConcurrencyFailureException occurred : ${request.requestURL}", ex)
+        log.error("ConcurrencyFailureException occurred : ${request.requestURL}", ex)
         val errorInfo = ErrorInfo(
             HttpStatus.CONFLICT.value(),
             MessageKey.ALREADY_UPDATE_MESSAGE,
@@ -73,7 +76,7 @@ class RestExceptionHandler {
     fun handleValidationError(request: HttpServletRequest, e: IllegalArgumentException): ErrorInfo {
         if (e.cause != null && e.cause!!.cause is BusinessException) {
             val be = e.cause!!.cause as BusinessException
-//            log.error("BusinessException occurred : ${request.requestURL}", be)
+            log.error("BusinessException occurred : ${request.requestURL}", be)
             return ErrorInfo(
                 HttpStatus.BAD_REQUEST.value(),
                 be.message,
@@ -81,7 +84,7 @@ class RestExceptionHandler {
                 null
             )
         }
-//        log.error("Exception occurred : ${request.requestURL}", e)
+        log.error("Exception occurred : ${request.requestURL}", e)
         return ErrorInfo(
             HttpStatus.INTERNAL_SERVER_ERROR.value(),
             MessageKey.SERVER_ERROR,
@@ -94,7 +97,7 @@ class RestExceptionHandler {
     fun handleConstraintViolationError(request: HttpServletRequest, e: ConstraintViolationException): ErrorInfo {
         if (e.cause != null && e.cause!!.cause is BusinessException) {
             val be = e.cause!!.cause as BusinessException
-//            log.error("ConstraintViolationException occurred : ${request.requestURL}", be)
+            log.error("ConstraintViolationException occurred : ${request.requestURL}", be)
             return ErrorInfo(
                 HttpStatus.BAD_REQUEST.value(),
                 be.message,
@@ -102,7 +105,7 @@ class RestExceptionHandler {
                 null
             )
         }
-//        log.error("ConstraintViolationException occurred : ${request.requestURL}", e)
+        log.error("ConstraintViolationException occurred : ${request.requestURL}", e)
         return ErrorInfo(
             HttpStatus.INTERNAL_SERVER_ERROR.value(),
             MessageKey.SERVER_ERROR,
@@ -122,7 +125,7 @@ class RestExceptionHandler {
     @ExceptionHandler(AuthenticationException::class)
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     fun handleUnAuthorizedError(ex: AuthenticationException, request: HttpServletRequest): ResponseEntity<Any> {
-//        log.error("AuthenticationException occurred : ${request.requestURL}", ex)
+        log.error("AuthenticationException occurred : ${request.requestURL}", ex)
         val errorInfo = ErrorInfo(
             HttpStatus.UNAUTHORIZED.value(),
             MessageKey.UNAUTHORIZED,
@@ -135,7 +138,7 @@ class RestExceptionHandler {
     @ExceptionHandler(AccessDeniedException::class)
     @ResponseStatus(HttpStatus.FORBIDDEN)
     fun handleAccessDeniedError(ex: AccessDeniedException, request: HttpServletRequest): ResponseEntity<Any> {
-//        log.error("AccessDeniedException occurred : ${request.requestURL}", ex)
+        log.error("AccessDeniedException occurred : ${request.requestURL}", ex)
         val errorInfo = ErrorInfo(
             HttpStatus.FORBIDDEN.value(),
             MessageKey.FORBIDDEN,
@@ -148,7 +151,7 @@ class RestExceptionHandler {
     @ExceptionHandler(BadCredentialsException::class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     fun handleBadCredentialsError(ex: BadCredentialsException, request: HttpServletRequest): ResponseEntity<Any> {
-//        log.error("BadCredentialsException occurred : ${request.requestURL}", ex)
+        log.error("BadCredentialsException occurred : ${request.requestURL}", ex)
         val errorInfo = ErrorInfo(
             HttpStatus.BAD_REQUEST.value(),
             MessageKey.BAD_CREDENTIAL,
@@ -164,7 +167,7 @@ class RestExceptionHandler {
         request: HttpServletRequest,
         ex: HttpMessageNotReadableException,
     ): ResponseEntity<Any> {
-//        log.error("HttpMessageNotReadableException : ${request.requestURL}", ex)
+        log.error("HttpMessageNotReadableException : ${request.requestURL}", ex)
         val errorInfo = ErrorInfo(HttpStatus.BAD_REQUEST.value(), null, ex.message, null)
         return ResponseEntity(errorInfo, HttpStatus.BAD_REQUEST)
     }
@@ -176,7 +179,11 @@ class RestExceptionHandler {
             val fieldValidation = FieldValidation().apply {
                 field = fieldError.field
                 messageKey = fieldError.defaultMessage
-                message = messageSource.getMessage(fieldError.defaultMessage?:"", getArgsVariable(fieldError.arguments), Locale.getDefault())
+                message = messageSource.getMessage(
+                    fieldError.defaultMessage ?: "",
+                    getArgsVariable(fieldError.arguments),
+                    Locale.getDefault()
+                )
             }
             validationsError.add(fieldValidation)
         }
@@ -221,7 +228,7 @@ class RestExceptionHandler {
     @ExceptionHandler(UnauthorizedException::class)
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     fun handleUnauthorizedExceptionError(ex: UnauthorizedException, request: HttpServletRequest): ResponseEntity<Any> {
-//        log.error("UnauthorizedException occurred : ${request.requestURL}", ex)
+        log.error("UnauthorizedException occurred : ${request.requestURL}", ex)
         val errorInfo = ErrorInfo(
             HttpStatus.UNAUTHORIZED.value(),
             MessageKey.UNAUTHORIZED,
