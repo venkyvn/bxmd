@@ -1,9 +1,7 @@
 package com.digi.bxmd.entity
 
 import com.digi.bxmd.base.entity.BaseEntity
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.Table
+import javax.persistence.*
 
 @Entity
 @Table(name = "transportation_routes")
@@ -19,4 +17,8 @@ data class TransportationRoute(
 
     @Column(name = "value")
     var value: String? = null,
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "province_id")
+    var province: Province? = null,
 ) : BaseEntity()

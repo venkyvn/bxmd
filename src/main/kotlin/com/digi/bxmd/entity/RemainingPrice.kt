@@ -1,6 +1,8 @@
 package com.digi.bxmd.entity
 
 import com.digi.bxmd.base.entity.BaseEntity
+import org.hibernate.annotations.Fetch
+import org.hibernate.annotations.FetchMode
 import javax.persistence.*
 
 @Entity
@@ -13,7 +15,8 @@ class RemainingPrice(
     var distanceCode: String? = null,
 
     @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
-    @JoinColumn(name = "remaining_price_id")
+    @JoinColumn(name = "remaining_price_id", referencedColumnName = "id")
+    @Fetch(FetchMode.JOIN)
     var prices: Set<Price> = mutableSetOf(),
 
     @Column(name = "time")

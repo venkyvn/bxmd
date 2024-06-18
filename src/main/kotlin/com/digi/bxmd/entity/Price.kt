@@ -1,9 +1,7 @@
 package com.digi.bxmd.entity
 
 import com.digi.bxmd.base.entity.BaseEntity
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.Table
+import javax.persistence.*
 
 @Entity
 @Table(name = "prices")
@@ -26,4 +24,8 @@ class Price(
 
     @Column(name = "price_add")
     var priceAdd: Boolean? = null,
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "remaining_price_id")
+    var remainingPrice: RemainingPrice? = null,
 ) : BaseEntity()

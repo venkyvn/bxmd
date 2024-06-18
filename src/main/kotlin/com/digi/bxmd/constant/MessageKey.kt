@@ -4,6 +4,7 @@ object MessageKey {
     const val UNAUTHORIZED = "error.auth.unauthorized"
     const val FORBIDDEN = "error.auth.forbidden"
     const val BAD_CREDENTIAL = "error.auth.bad.credential"
+    const val BAD_REQUEST = "error.auth.bad.request"
     const val INVALID_REFRESH_TOKEN = "error.auth.invalid.refreshToken"
 
     const val SERVER_ERROR = "error.common.internal.server"

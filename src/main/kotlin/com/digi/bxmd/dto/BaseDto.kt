@@ -8,7 +8,7 @@ abstract class BaseDto : Serializable {
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     var id: Long? = null
 
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    var updatedDate: Date? = null
+//    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+//    var updatedDate: Date? = null
 
 }
