@@ -1,16 +1,22 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/${POSTGRES_DB}
-    username: ${POSTGRES_USER}
-    password: ${POSTGRES_PASSWORD}
+    url: jdbc:sqlserver://localhost:1433;databaseName=bxmd;encrypt=true;trustServerCertificate=true
+    username: sa
+    password: MyPass@word
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.SQLServerDialect
+        format_sql: true
 
   flyway:
-    enabled: false
+    enabled: true
     locations: classpath:db/migration
+    baseline-on-migrate: true
 
 apiBasePath: /api/v1
 

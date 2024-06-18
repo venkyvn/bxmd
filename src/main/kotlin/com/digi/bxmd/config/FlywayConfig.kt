@@ -21,8 +21,6 @@ class FlywayConfig(
         if (!enableFlyWay) return
 
         Flyway.configure()
-            .baselineOnMigrate(env.getProperty("spring.flyway.baseline-on-migrate", Boolean::class.java, false))
-            .locations(*env.getProperty("spring.flyway.locations", "classpath:db/migration").split(",").toTypedArray())
             .dataSource(dataSource)
             .load()
             .migrate()

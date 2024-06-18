@@ -7,15 +7,16 @@ import javax.persistence.*
 @Table(name = "provinces")
 class Province(
 
-    @Column(name = "label", nullable = false)
-    val label: String? = null,
+    @Column(name = "label")
+    var label: String? = null,
 
-    @Column(name = "value", nullable = false)
-    val value: String? = null,
+    @Column(name = "value")
+    var value: String? = null,
 
-    @Column(name = "licenseplates", nullable = false)
-    val licenseplates: String? = null,
+    @Column(name = "licenseplates")
+    var licenseplates: String? = null,
 
-    @OneToMany(mappedBy = "province", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
-    val transportationRoutes: List<TransportationRoute>? = mutableListOf(),
+    @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
+    @JoinColumn(name = "province_id")
+    var transportationRoutes: Set<TransportationRoute> = mutableSetOf(),
 ) : BaseEntity()

@@ -23,6 +23,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("com.microsoft.sqlserver:mssql-jdbc:11.2.3.jre17")
 
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
@@ -36,18 +37,17 @@ dependencies {
     implementation("io.springfox:springfox-swagger2:2.9.2")
     implementation("io.springfox:springfox-swagger-common:2.9.2")
 
-    implementation("org.flywaydb:flyway-core")
+//    implementation("org.flywaydb:flyway-core")
+    implementation("org.flywaydb:flyway-sqlserver")
 
     implementation("io.github.microutils:kotlin-logging-jvm:2.0.11")
 //    implementation("ch.qos.logback:logback-classic:1.2.6")
-
 
     // Swagger/OpenAPI
     implementation("org.springdoc:springdoc-openapi-ui:1.6.6")
     implementation("org.springdoc:springdoc-openapi-kotlin:1.6.6")
 
-
-    runtimeOnly("org.postgresql:postgresql")
+//    runtimeOnly("org.postgresql:postgresql")
 
     compileOnly("org.projectlombok:lombok:1.18.22")
 }
