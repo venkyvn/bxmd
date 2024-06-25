@@ -31,10 +31,10 @@ class ProvinceServiceImpl @Autowired constructor(packageRepository: ProvinceRepo
             var existingRoutes = province.transportationRoutes.toMutableSet()
 
             // remove old route
-            existingRoutes.removeIf { route -> dto.transportationRoutes.none { it.id == route.id } }
+            existingRoutes.removeIf { route -> dto.transportationRoutes!!.none { it.id == route.id } }
 
             // update existing routes and add new routes
-            dto.transportationRoutes.forEach { newRoute ->
+            dto.transportationRoutes?.forEach { newRoute ->
                 run {
                     val existingRoute = existingRoutes.find { it.id == newRoute.id }
                     if (existingRoute != null) {

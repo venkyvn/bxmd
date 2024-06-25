@@ -34,10 +34,10 @@ class RemainingPriceServiceImpl @Autowired constructor(packageRepository: Remain
             var existingRemainingPrices = remainingPrice.prices.toMutableSet()
 
             // remove old route
-            existingRemainingPrices.removeIf { route -> dto.prices.none { it.id == route.id } }
+            existingRemainingPrices.removeIf { route -> dto.prices!!.none { it.id == route.id } }
 
             // update existing routes and add new routes
-            dto.prices.forEach { newPrice ->
+            dto.prices?.forEach { newPrice ->
                 run {
                     val existingPrice = existingRemainingPrices.find { it.id == newPrice.id }
                     if (existingPrice != null) {

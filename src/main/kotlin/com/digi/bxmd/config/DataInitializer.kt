@@ -11,7 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Component
 
 @Component
-class DataInitializer() : CommandLineRunner {
+class DataInitializer : CommandLineRunner {
     @Autowired
     lateinit var roleRepository: RoleRepository
 
