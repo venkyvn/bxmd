@@ -28,11 +28,9 @@ class SecurityConfiguration @Autowired constructor(
 
     override fun configure(http: HttpSecurity) {
         http
-            .csrf().disable()
+            .csrf().and().cors().disable()
             .httpBasic().disable()
             .formLogin().disable()
-            .cors()
-            .and()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
             .authorizeRequests()
