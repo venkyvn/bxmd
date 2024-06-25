@@ -6,19 +6,19 @@ import org.springframework.web.cors.CorsConfiguration
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource
 import org.springframework.web.filter.CorsFilter
 
+
 @Configuration
-class CORSConfig {
+class CorsConfig {
+
     @Bean
     fun corsFilter(): CorsFilter {
         val source = UrlBasedCorsConfigurationSource()
         val config = CorsConfiguration()
-        config.allowCredentials = true
-        config.addAllowedOrigin("*")
-        config.addAllowedHeader("*")
-        config.addAllowedMethod("*")
-        config.addExposedHeader("Content-Length")
+        config.allowedOrigins = listOf("*")  // Allow all origins
+        config.allowedMethods = listOf("*")  // Allow all HTTP methods
+        config.allowedHeaders = listOf("*")  // Allow all headers
+        config.allowCredentials = true  // Allow credentials
         source.registerCorsConfiguration("/**", config)
         return CorsFilter(source)
     }
 }
-

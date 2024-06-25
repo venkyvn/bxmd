@@ -27,10 +27,11 @@ class SecurityConfiguration @Autowired constructor(
     fun passwordEncoder(): PasswordEncoder = BCryptPasswordEncoder()
 
     override fun configure(http: HttpSecurity) {
+        http.cors().and().csrf().disable()  // Enable CORS and disable CSRF if necessary
+        http.httpBasic().disable()
+        http.formLogin().disable()
+
         http
-            .csrf().and().cors().disable()
-            .httpBasic().disable()
-            .formLogin().disable()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
             .authorizeRequests()
