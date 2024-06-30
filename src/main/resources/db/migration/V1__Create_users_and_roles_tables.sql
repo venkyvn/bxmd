@@ -1,3 +1,15 @@
+drop table if exists access_token;
+drop table if exists packages;
+drop table if exists prices;
+drop table if exists remaining_prices;
+drop table if exists transportation_routes;
+drop table if exists provinces;
+drop table if exists user_roles;
+drop table if exists roles;
+drop table if exists user_token;
+drop table if exists users;
+
+
 CREATE TABLE access_token
 (
     id            BIGINT IDENTITY (1,1) PRIMARY KEY,
