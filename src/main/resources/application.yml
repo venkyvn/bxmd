@@ -3,7 +3,7 @@ server:
 
 spring:
   datasource:
-    url: ${DATABASE_URL:jdbc:sqlserver://localhost:1433;databaseName=bxmd;encrypt=true;trustServerCertificate=true}
+    url: ${DATABASE_URL:jdbc:sqlserver://localhost:1433;databaseName=bxmd;encrypt=true;trustServerCertificate=true;characterEncoding=UTF-8;}
     username: ${DATABASE_USERNAME:sa}
     password: ${DATABASE_PASSWORD:MyPass@word}
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
